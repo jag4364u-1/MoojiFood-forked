@@ -1,16 +1,14 @@
 package com.mooji.cod.moojifood.mainScreen
 
 import com.mooji.cod.moojifood.model.Food
+import io.mockk.every
+import io.mockk.just
+import io.mockk.runs
+import io.mockk.spyk
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
-import androidx.recyclerview.widget.RecyclerView
 
-@RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE, sdk = [28])
 class FoodAdapterTest {
 
     private lateinit var adapter: FoodAdapter
@@ -45,8 +43,11 @@ class FoodAdapterTest {
             createFood(subject = "Sushi", price = "15"),
             createFood(subject = "Taco", price = "5")
         )
-        adapter = FoodAdapter(data, fakeFoodEvents)
-        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {})
+        adapter = spyk(FoodAdapter(data, fakeFoodEvents))
+        every { adapter.notifyItemInserted(any()) } just runs
+        every { adapter.notifyItemRemoved(any()) } just runs
+        every { adapter.notifyItemChanged(any()) } just runs
+        every { adapter.notifyDataSetChanged() } just runs
     }
 
     @Test
@@ -168,8 +169,8 @@ class FoodAdapterTest {
     @Test
     fun addFood_toEmptyAdapter() {
         val emptyData = arrayListOf<Food>()
-        val emptyAdapter = FoodAdapter(emptyData, fakeFoodEvents)
-        emptyAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {})
+        val emptyAdapter = spyk(FoodAdapter(emptyData, fakeFoodEvents))
+        every { emptyAdapter.notifyItemInserted(any()) } just runs
         val newFood = createFood(subject = "Waffle")
 
         emptyAdapter.addFood(newFood)
