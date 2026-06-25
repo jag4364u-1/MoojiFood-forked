@@ -19,6 +19,7 @@ class MainScreenViewModel(
         val page: Int = 0,
         val isLoading: Boolean = false,
         val query: String = "",
+        val error: String? = null,
     )
 
     private val _uiState = MutableStateFlow(UiState())
