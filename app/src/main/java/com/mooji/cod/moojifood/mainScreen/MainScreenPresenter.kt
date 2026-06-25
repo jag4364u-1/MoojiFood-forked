@@ -2,7 +2,7 @@ package com.mooji.cod.moojifood.mainScreen
 
 import com.mooji.cod.moojifood.Constant
 import com.mooji.cod.moojifood.model.Food
-import com.mooji.cod.moojifood.room.FoodDao
+import com.mooji.cod.moojifood.model.FoodDao
 
 
 //tag 105

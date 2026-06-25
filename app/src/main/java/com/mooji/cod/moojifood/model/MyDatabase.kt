@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.mooji.cod.moojifood.room.FoodDao
 
 //منظور ::class یعنی نشان میدهد این را بعنوان یک کلاس در نظر بگیر
 @Database(version = 1, entities = [Food::class], exportSchema = false)
